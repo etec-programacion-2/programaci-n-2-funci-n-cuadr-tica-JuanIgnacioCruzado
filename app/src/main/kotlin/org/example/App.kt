@@ -3,17 +3,18 @@
  */
 package org.example
 
+import kotlin.math.sqrt
+
 fun main() {
     val a = 2
     val b = 5
     val c = -3
 
     if (a == 0) {
-        println("El coeficiente 'a' no puede ser cero.")
+        println("El coeficiente 'a' no puede ser cero. No es una ecuación cuadrática.")
         return
     }
 
-    // Mostrar la función en formato ax² + bx + c
     val funcion = buildString {
         append("${a}x² ")
         append(if (b >= 0) "+ $b" else "- ${-b}")
@@ -21,22 +22,45 @@ fun main() {
         append(if (c >= 0) "+ $c" else "- ${-c}")
     }
 
-    println("Función cuadratica: $funcion = 0")
+    println("Función ingresada: $funcion = 0\n")
 
     println("Tabla de valores:")
     println("-------------------------")
     println("|   x   |   f(x) = ax² + bx + c   |")
     println("-------------------------")
-
     for (x in -5..5) {
         val y = calcularFuncion(a, b, c, x)
         println(String.format("| %3d   | %8d               |", x, y))
     }
+    println("-------------------------\n")
 
-    println("-------------------------")
+    val d = calcularDiscriminante(a, b, c)
+    println("Discriminante: $d")
+
+    calcularRaices(a, b, d)
 }
 
 fun calcularFuncion(a: Int, b: Int, c: Int, x: Int): Int {
     return a * x * x + b * x + c
+}
+
+fun calcularDiscriminante(a: Int, b: Int, c: Int): Int {
+    return b * b - 4 * a * c
+}
+
+fun calcularRaices(a: Int, b: Int, d: Int) {
+    if (d > 0) {
+        val x1 = (-b + sqrt(d.toDouble())) / (2 * a)
+        val x2 = (-b - sqrt(d.toDouble())) / (2 * a)
+        println("La ecuación tiene dos raíces reales y diferentes:")
+        println("x₁ = %.2f".format(x1))
+        println("x₂ = %.2f".format(x2))
+    } else if (d == 0) {
+        val x = -b.toDouble() / (2 * a)
+        println("La ecuación tiene una raíz real (doble):")
+        println("x = %.2f".format(x))
+    } else {
+        println("La ecuación no tiene raíces reales (discriminante negativo).")
+    }
 }
 
