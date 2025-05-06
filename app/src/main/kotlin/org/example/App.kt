@@ -22,5 +22,21 @@ fun main() {
     }
 
     println("Función cuadratica: $funcion = 0")
+
+    println("Tabla de valores:")
+    println("-------------------------")
+    println("|   x   |   f(x) = ax² + bx + c   |")
+    println("-------------------------")
+
+    for (x in -5..5) {
+        val y = calcularFuncion(a, b, c, x)
+        println(String.format("| %3d   | %8d               |", x, y))
+    }
+
+    println("-------------------------")
+}
+
+fun calcularFuncion(a: Int, b: Int, c: Int, x: Int): Int {
+    return a * x * x + b * x + c
 }
 
