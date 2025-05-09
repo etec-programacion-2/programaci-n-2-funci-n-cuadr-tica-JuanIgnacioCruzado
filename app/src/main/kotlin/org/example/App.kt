@@ -79,5 +79,5 @@ fun calcularRaices(a: Int, b: Int, d: Int) {
         }
     }
      //Mensaje final indicando el fin del programa
-    println("\n--- Fin del programa ---")
+    println("\n--- Fin del programa ---.")
 }
